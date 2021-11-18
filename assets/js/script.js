@@ -1,5 +1,8 @@
 // TODO: Declare any global variables we need
-
+let totalTails = 0;
+let totalHeads = 0;
+let percentageHeads = 0;
+let percentageTails = 0;
 
 document.addEventListener('DOMContentLoaded', function () {
     // This is just a sanity check to make sure your JavaScript script is getting loaded
@@ -7,6 +10,44 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('Hi')
 
     // TODO: Add event listener and handler for flip and clear buttons
+    document.getElementById('flip').addEventListener('click', function(){
+        console.log('Flip button clicked')
+        let random = Math.random() 
+        if(random < 0.5)
+        {
+            document.getElementById("penny-img").src = './assets/images/penny-tails.jpg'            
+            document.getElementById("status-text").textContent = "You Flipped Tails!";
+            totalTails++;
+        } 
+        else
+        {
+            document.getElementById("penny-img").src = './assets/images/penny-heads.jpg'            
+            document.getElementById("status-text").textContent = "You Flipped Heads!";
+            totalHeads++;
+        }
+
+        percentageHeads = Math.round(100 * totalHeads / (totalHeads + totalTails)); 
+        percentageTails = Math.round(100 * totalTails / (totalHeads + totalTails)); 
+
+        document.getElementById("heads").textContent = totalHeads;
+        document.getElementById("tails").textContent = totalTails;
+        document.getElementById("heads-percent").textContent = percentageHeads + "%";
+        document.getElementById("tails-percent").textContent = percentageTails + "%";
+    })
+
+    
+    document.getElementById('clear').addEventListener('click', function(){
+
+        totalTails = 0;
+        totalHeads = 0;
+        percentageHeads = 0;
+        percentageTails = 0;
+
+        document.getElementById("heads").textContent = totalHeads;
+        document.getElementById("tails").textContent = totalTails;
+        document.getElementById("heads-percent").textContent = percentageHeads + "%";
+        document.getElementById("tails-percent").textContent = percentageTails + "%";
+    })
 
     // Flip Button Click Handler
         // TODO: Determine flip outcome
